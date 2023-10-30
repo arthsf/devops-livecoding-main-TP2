@@ -22,7 +22,7 @@ jobs:
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=arthsf_devops-livecoding-main-TP2 -Dsonar.organization=arthsf -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./backend-api/pom.xml
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=arthsf_devops-livecoding-main-TP2 -Dsonar.organization=arthsf -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./simple-api/pom.xml
 
   # define job to build and publish docker image
   
