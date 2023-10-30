@@ -2,7 +2,7 @@ name: CI devops 2023
 on:
   #to begin you want to launch this job in main and develop
   push:
-    branches: #TODO 
+    branches: [ main, develop ]
   pull_request:
 
 jobs:
@@ -14,8 +14,9 @@ jobs:
 
      #do the same with another action (actions/setup-java@v3) that enable to setup jdk 17
       - name: Set up JDK 17
+        uses: actions/setup-java@v3
         #TODO
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: #TODO
+        run: mvn -B package --file pom.xml
