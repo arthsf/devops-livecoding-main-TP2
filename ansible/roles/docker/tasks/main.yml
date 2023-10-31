@@ -1,0 +1,77 @@
+# Install Docker
+  tasks:
+
+  - name: Install device-mapper-persistent-data
+    yum:
+      name: device-mapper-persistent-data
+      state: latest
+
+  - name: Install lvm2
+    yum:
+      name: lvm2
+      state: latest
+
+  - name: add repo docker
+    command:
+      cmd: sudo yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
+  - name: Install Docker
+    yum:
+      name: docker-ce
+      state: present
+
+  - name: Install python3
+    yum:
+      name: python3
+      state: present
+
+  - name: Install docker with Python 3
+    pip:
+      name: docker
+      executable: pip3
+    vars:
+      ansible_python_interpreter: /usr/bin/python3
+
+  - name: Make sure Docker is running
+    service: name=docker state=started
+    tags: docker
+
+  - name: Create a network
+    docker_network:
+      name: my-network
+      driver: bridge
+      ipam_config:
+        - subnet: ""
+  
+  - name: Launch the PostgreSQL database
+    docker_container:
+      name: db
+      image: arthsf/tp-devops-database:lastest
+      env:
+        POSTGRES_DB: "db"
+        POSTGRES_USER: "usr"
+        POSTGRES_PASSWORD: "pwd"
+      networks:
+        - name: my-network
+      volumes:
+        - db-volume: /var/lib/postgresql/data
+  
+  - name: Run API Backend
+    docker_container:
+      name: my-api
+      image: arthsf/tp-devops-simple-api:latest
+      networks:
+        - name: my-network
+      depends_on:
+        - db
+      
+  - name: Run HTTPD
+    docker_container:
+      name: httpd
+      image: arthsf/tp-devops-http-server:latest
+      ports:
+        - "80:80"
+      networks:
+        - name: my-network
+      depends_on:
+        - my-api
