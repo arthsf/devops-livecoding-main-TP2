@@ -1,0 +1,9 @@
+  - name: Run API Backend
+    docker_container:
+      name: my-api
+      image: arthsf/tp-devops-simple-api:latest
+      networks:
+        - name: my-network
+      depends_on:
+        - db
+      

@@ -1,0 +1,7 @@
+  - name: Create a network
+    docker_network:
+      name: my-network
+      driver: bridge
+      ipam_config:
+        - subnet: ""
+  
