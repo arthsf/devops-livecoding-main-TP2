@@ -1,6 +1,3 @@
-# Install Docker
-  tasks:
-
   - name: Install device-mapper-persistent-data
     yum:
       name: device-mapper-persistent-data

@@ -1,12 +1,10 @@
   - name: Launch the PostgreSQL database
     docker_container:
-      name: db
-      image: arthsf/tp-devops-database:lastest
+      name: my-db
+      image: arthsf/tp-devops-db:latest
       env:
         POSTGRES_DB: "db"
         POSTGRES_USER: "usr"
         POSTGRES_PASSWORD: "pwd"
       networks:
         - name: my-network
-      volumes:
-        - db-volume: /var/lib/postgresql/data

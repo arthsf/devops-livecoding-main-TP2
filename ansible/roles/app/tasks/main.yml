@@ -2,8 +2,7 @@
     docker_container:
       name: my-api
       image: arthsf/tp-devops-simple-api:latest
+      pull: true
       networks:
         - name: my-network
-      depends_on:
-        - db
       

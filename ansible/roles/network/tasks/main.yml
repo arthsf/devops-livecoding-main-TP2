@@ -2,6 +2,6 @@
     docker_network:
       name: my-network
       driver: bridge
-      ipam_config:
-        - subnet: ""
+    vars:
+      ansible_python_interpreter: ../../usr/bin/python3
   
