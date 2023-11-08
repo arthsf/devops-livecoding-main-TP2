@@ -1,4 +1,4 @@
-# **Docker**
+# **DevOps**
 # _TP1 - Discovering Docker_
 
 > The final goal of this TP is to have a 3-tier web API running.
